@@ -24,7 +24,7 @@
 
         <div>
 
-            <form action="auth/" method="POST" class="form-login">
+            <form action="auth/" method="POST" class="form-style">
                 {% csrf_token %}
         
                 <table>
@@ -33,7 +33,7 @@
 
                 {% if error == True %}
 
-                <p class = "errorLogin">Los datos introducidos son incorrectos</p>
+                <p class = "error">Los datos introducidos son incorrectos</p>
 
                 {% endif %}
 
