@@ -1,1 +1,1 @@
-# skin-diseases
+# TFG Ingeniería del Software
