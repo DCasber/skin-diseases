@@ -79,8 +79,12 @@ WSGI_APPLICATION = 'SistemaWeb.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'skin-diseases',  # Nombre BD
+        'USER': 'postgres',  # Por defecto
+        'PASSWORD': 'bd_pgsql3003',  # Contraseña
+        'HOST': '127.0.0.1',
+        'DATABASE_PORT': '5432',
     }
 }
 

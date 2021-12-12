@@ -6,27 +6,29 @@ from .forms import FormularioInicioSesion, FormularioRegistro
 
 
 def inicioSesion(request):
-    
+
     formulario = FormularioInicioSesion()
-    
+
     error = False
-    
+
     return render(request, "autenticación/inicioSesión.html", {"formulario": formulario, "error": error})
 
 
 def registro(request):
-    
+
     if request.method == "GET":
         formulario = FormularioRegistro()
-    
+
         error = False
-    
+
         return render(request, "autenticación/registro.html", {"formulario": formulario, "error": error})
-        
+
     elif request.method == "POST":
         return redirect("")
-        
-    
+
 
 def autenticacion(request):
-    return
+
+    #TODO: AUTENTICACIÓN
+
+    return redirect("/home/")
