@@ -2,6 +2,7 @@ from django.forms.forms import Form
 from django.shortcuts import render, redirect
 from .forms import FormularioInicioSesion, FormularioRegistro
 from django.views import View
+from django.contrib import messages
 
 from functools import update_wrapper
 from django.http import Http404
@@ -35,21 +36,44 @@ def admin_view(view, cacheable=False):
 
 def inicioSesion(request):
 
-    if request.user and request.user.is_authenticated:
+    if request.method == "GET":
 
-        if request.user.is_superuser:
-            return redirect("/admin/")
+        if request.user and request.user.is_authenticated:
+
+            if request.user.is_superuser:
+                return redirect("/admin/")
+            else:
+                return redirect("/home/")
+
         else:
-            return redirect("/home/")
+            error = False
 
-    else:
-        error = False
-        if request.GET.get('error'):
+            formulario = FormularioInicioSesion()
+
+            return render(request, "autenticación/inicioSesión.html", {"formulario": formulario, "error": error, "msg": " "})
+
+    elif request.method == "POST":
+        usuario = authenticate(request, username=request.POST.get(
+            "nombre"), password=request.POST.get("password"))
+
+        if usuario is not None:
+
+            login(request, usuario)
+
+            if usuario.is_superuser:
+                return redirect("/admin/")
+            else:
+                return redirect("/home/")
+
+        else:
+
             error = True
 
-        formulario = FormularioInicioSesion()
+            msg = "No se ha encontrado un usuario con los datos introducidos"
 
-        return render(request, "autenticación/inicioSesión.html", {"formulario": formulario, "error": error})
+            formulario = FormularioInicioSesion()
+
+            return render(request, "autenticación/inicioSesión.html", {"formulario": formulario, "error": error, "msg": msg})
 
 
 class Registro(View):
@@ -67,33 +91,23 @@ class Registro(View):
 
             formulario = FormularioRegistro()
 
-            return render(request, "autenticación/registro.html", {"formulario": formulario})
-        
+            return render(request, "autenticación/registro.html", {"formulario": formulario, 'error': False})
+
     def post(self, request):
-        ## TODO: Comprobaciones del formulario de registro (ejs: inyección sql, existe ya el usuario (nombre), contraseñas iguales)
-    
-        ## TODO: Inserción de nuevo usuario. Contraseña con salting. Mensaje de confirmación al email. Mensaje al usuario de si el registro a salido bien o no. De salir bien mensaje de que debe confirmar su cuenta a través de su email. Hasta que no lo haga no podrá logearse, (o bien se introduce primero con un campo boolean a falso o debemos pasar los datos de alguna manera) (como hacerlo automatico?)
-    
-        return render(request, "autenticación/inicioSesión.html")
 
-
-def autenticacion(request):
-
-    usuario = authenticate(request, username=request.POST.get(
-        "nombre"), password=request.POST.get("password"))
-
-    if usuario is not None:
-
-        login(request, usuario)
-
-        if usuario.is_superuser:
-            return redirect("/admin/")
+        form = FormularioRegistro(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('/home/')
         else:
-            return redirect("/home/")
+            print(form.instance.username)
+            return render(request, 'autenticación/registro.html', {'formulario': form, 'error': True})
 
-    else:
-
-        return redirect("/?error=1")
+        # TODO:  Mensaje de confirmación al email. Mensaje al usuario de si el registro a salido bien o no. De salir bien mensaje de que debe confirmar su cuenta a través de su email. Hasta que no lo haga no podrá logearse, (o bien se introduce primero con un campo boolean a falso o debemos pasar los datos de alguna manera) (como hacerlo automatico?)
 
 
 def cierreSesion(request):

@@ -24,18 +24,46 @@
 
         <h2>Registro</h2>
 
-        <div>
+        <div style="padding-bottom: 5em">
 
-            <form action="registro/" method="POST" class="form-style">
+            <form action="/registro/" method="POST" class="form-style">
                 {% csrf_token %}
 
                 <table>
-                    {{formulario.as_table}}
+                    <tbody>
+                        <tr>
+                            <th><label for="id_username">Nombre:</label></th>
+
+                            <td><input type="text" name="username" class="form-control" maxlength="30" autofocus=""
+                                    required="" id="id_username"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="id_email">Email:</label></th>
+                            <td><input type="email" name="email" class="form-control" maxlength="200" required=""
+                                    id="id_email"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="id_password1">Contraseña:</label></th>
+                            <td><input type="password" name="password1" class="form-control" required=""
+                                    id="id_password1"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="id_password2">Confirmar contraseña:</label></th>
+                            <td>
+                                </ul><input type="password" name="password2" class="form-control" required=""
+                                    id="id_password2">
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
 
                 {% if error == True %}
 
-                <p class = "error">Los datos introducidos son incorrectos</p>
+                {% for field in formulario %}
+                {% for error in field.errors %}
+                <p class="error"> {{ error }} </p>
+                {% endfor %}
+                {% endfor %}
 
                 {% endif %}
 
