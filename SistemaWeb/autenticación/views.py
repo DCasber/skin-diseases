@@ -110,7 +110,7 @@ class Registro(View):
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
-            mail_subject = 'Activate your blog account.'
+            mail_subject = 'Confirmación de cuenta'
             message = render_to_string('autenticación/acc_active_email.html', {
                 'user': user,
                 'domain': current_site.domain,
@@ -122,7 +122,7 @@ class Registro(View):
                 mail_subject, message, to=[to_email]
             )
             email.send()
-            return HttpResponse('Please confirm your email address to complete the registration')
+            return render(request, 'autenticación/mensajeActivación.html', {'titulo': "Confirmar email", 'mensaje': "Por favor, confirme el registro a través de la cuenta de correo electrónico introducida.", "activacionConfirmada": False})
 
         else:
             print(form.instance.username)
@@ -147,6 +147,6 @@ def activate(request, uidb64, token):
         user.save()
         login(request, user)
         # return redirect('home')
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+        return render(request, 'autenticación/mensajeActivación.html', {'titulo': "Activación válida", 'mensaje': "Gracias por confirmar su registro. Ahora podrá iniciar sesión.", "activacionConfirmada": True})
     else:
-        return HttpResponse('Activation link is invalid!')
+        return render(request, 'autenticación/mensajeActivación.html', {'titulo': "Activación inválida", 'mensaje': "El link de activación es inválido.", "activacionConfirmada": False})
