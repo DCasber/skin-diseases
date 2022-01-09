@@ -2,6 +2,12 @@
 
 {% load static %}
 
+{% block css %}
+
+<link href="{% static 'css/home.css' %}" rel="stylesheet">
+
+{% endblock %}
+
 {% block title %}
 
 Página de Inicio
@@ -14,7 +20,35 @@ Página de Inicio
 
 <section>
 
-  Texto explicativo de la pagina + botón "comenzar"
+  <div class="context-title">
+    <h2>Contexto</h2>
+  </div>
+
+  <div class="text-container">
+    El cáncer de piel es uno de los canceres más problemáticos a nivel mundial. Dentro de este grupo, se encuentra el
+    melanoma, la forma más mortal de ellos. Además de poder ser detectado de manera temprana mediante una experta
+    inspección visual, es posible detectarlo de manera automática mediante el análisis de imágenes.
+
+    <br /><br />
+
+    Con ello, entra en juego la dermatoscopia, una técnica de diagnóstico por imagen que consigue eliminar el reflejo
+    superficial de la piel, mejorando la visualización de los niveles más profundos de esta. Se ha demostrado que la
+    dermatoscopia proporciona una precisión diagnóstica mejorada en comparación con la fotografía estándar o la
+    inspección visual sin ningún tipo de ayuda adicional.
+
+
+
+  </div>
+
+  <hr class="rounded">
+
+  <div class="comenzar-diagnostico">
+    <a class="btn btn-success" href="/diagnóstico/" role="button">Comenzar Diagnóstico</a>
+  </div>
+
+
+
+
 
 </section>
 
