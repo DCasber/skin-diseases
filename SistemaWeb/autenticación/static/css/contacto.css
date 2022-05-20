@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+section{
+    height: 100vh;
+}
+
+.text-container{
+    text-align: justify;
+    justify-content: center;
+    display: flex;
+    box-shadow: 1px 1px 6px rgba(0,0,0,0.3);
+    border-radius: 3%;
+    margin-top: 2%;
+    margin-bottom: 5%;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding: 10px 15px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.context-title{
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    margin-top: 2%;
+    margin-left: 25%;
+    margin-right: 25%;
+    font-size:large;
+    font-family: 'Montserrat', sans-serif;
+    text-shadow: 1px 1px 0.8px gray;
+}
+
+.comenzar-diagnostico{
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    margin-top: 2%;
+    margin-left: 25%;
+    margin-right: 25%;
+    font-size:large;
+    font-family: 'Montserrat', sans-serif;
+    text-shadow: 1px 1px 0.8px gray;
+}
+
+hr.rounded {
+    border-top: 8px solid #bbb;
+    border-radius: 5px;
+  }
+
+.form-container{
+    height: 100vh;
+    padding-top:2em;
+    padding-bottom:8em;
+}
+
+.form-style{
+    text-align: center; 
+    background-color: #53B8BB;
+    box-shadow: 1px 1px 6px rgba(0,0,0,0.3);
+    width: 80%;
+    max-width: 400px;
+    border-radius: 3%;
+    margin: auto; 
+    padding: 0 15px 10px 15px;
+}
+
+.form-control{
+    margin-top:20px;
+    margin-bottom: 5px;
+}
+
+.validate{
+    border: 1.5px solid #000;
+    font-size:small;
+    background: #fef1ec;
+    color: #000;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 1px 1px 4px #000;
+    border-radius: 5px;
+    width: 80%;
+    margin: 10px auto;
+    padding: 5px 5px;
+}
+
+.error{
+    border: 1.5px solid #cd0a0a;
+    font-size:small;
+    background: #fef1ec;
+    color: #cd0a0a;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 1px 1px 4px #000;
+    border-radius: 5px;
+    width: 80%;
+    margin: 10px auto;
+    padding: 5px 5px;
+}
+
+
+td {
+    padding: 0px 5px;
+  }
+
+
+
+table{
+    margin: 15px auto
+}
+
+
+h2{
+   padding-bottom: 15px;
+   text-align: center; 
+   font-family: 'Montserrat', sans-serif;
+   text-shadow: 1px 1px 0.8px gray;
+}
+
+h5{
+    text-align: center; 
+    font-family: 'Montserrat', sans-serif;
+    text-shadow: 1px 1px 0.8px gray;
+ }
+
+label{
+    font-family: 'Montserrat', sans-serif;
+    padding-top:1em;
+
+}
+
+.btn{
+    font-family: 'Montserrat', sans-serif;
+}
+
+input[type=text], input[type=email]{
+    font-family: 'Montserrat', sans-serif !important;
+}

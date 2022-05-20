@@ -5,13 +5,13 @@
 
 {% block css %}
 
-<link href="{% static 'css/home.css' %}" rel="stylesheet">
+<link href="{% static 'css/contacto.css' %}" rel="stylesheet">
 
 {% endblock %}
 
 {% block title %}
 
-Página de Inicio
+Contacto
 
 {% endblock %}
 
@@ -19,13 +19,44 @@ Página de Inicio
 
 {% block content %}
 
-<section>
+<section class="form-container">
 
-  <div class="context-title">
-    <h2>Atención al cliente</h2>
+  <h2>Atención al cliente</h2>
+
+  <h5>Escriba el asunto y el contenido de la consulta:</h5>
+
+  <div>
+
+    <form action="/contacto/" method="POST" class="form-style">
+      {% csrf_token %}
+
+      <table>
+        {{formulario.as_table}}
+      </table>
+
+      <div>
+
+        {% if "validez" in request.GET %}
+
+        <p class="validate">Informacion enviada correctamente. Gracias.</p>
+
+        {% endif %}
+
+        {% if "error" in request.GET %}
+
+        <p class="error">Se ha producido un error. Sentimos las molestias.</p>
+
+        {% endif %}
+
+      </div>
+
+      <input type="submit" value="Enviar" style="width: 150px;" class="btn btn-primary" />
+
+    </form>
+
   </div>
 
-
 </section>
+
 
 {% endblock %}
